@@ -30,8 +30,23 @@ const generatePassword = (password = "") => {
   if (symbolInput.checked) {
     password += getRandomData(symbolSet);
   }
-  console.log(password);
+  if (password.length < totalChar.value) {
+    return generatePassword(password);
+  }
+
+  passBox.innerText = truncateString(password, totalChar.value);
 };
 
 //Event listener
-btn.addEventListener("click", generatePassword);
+
+btn.addEventListener("click", function () {
+  generatePassword();
+});
+function truncateString(str, num) {
+  if (str.length > num) {
+    let subStr = str.substring(0, num);
+    return subStr;
+  } else {
+    return str;
+  }
+}
